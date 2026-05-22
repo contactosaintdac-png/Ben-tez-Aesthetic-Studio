@@ -1,0 +1,298 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=satoshi@300,400,500,700,900&f[]=cabinet-grotesk@100,200,300,400,500,700,800&f[]=melodrama@300,400,500,600,700&f[]=chillax@200,300,400,500,600,700&f[]=sentient@200,300,400,500,600,700&f[]=zodiak@100,200,300,400,500,600,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Italiana&family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Unbounded:wght@300;400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-display, "Cormorant Garamond"), Georgia, serif;
+  --font-sans: var(--font-body, "Plus Jakarta Sans"), sans-serif;
+  --color-brand-dark: #040607; /* Black */
+  --color-brand-purple: #5B2A62; /* Velvet Purple */
+  --color-brand-royal: #4928C2; /* Ultrasonic Blue */
+  --color-brand-electric: #BF40FA; /* Hyper Magenta */
+  --color-brand-glow: #E3D9FC; /* Periwinkle */
+  --color-brand-neon: #BF40FA; /* Hyper Magenta as neon/active color */
+  --color-brand-cream: #E3D9FC; /* Periwinkle as cream light */
+}
+
+/* Base custom styles */
+body {
+  background-color: #040607; /* Black background */
+  color: #f4f4f5; /* zinc-100 */
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.5s ease;
+}
+
+/* Utility to hide scrollbars while preserving functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom text selection */
+::selection {
+  background-color: rgba(128, 0, 255, 0.3); /* Morado realeza semi-transparente */
+  color: #ffffff;
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (min-width: 1024px) {
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* --- Premium Aesthetics Design System Utilities --- */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Premium glassmorphic panel with ultra-fine, highly transparent borders */
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(128, 0, 255, 0.01) 50%,
+    rgba(255, 255, 255, 0.005) 100%
+  );
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 20px 50px -10px rgba(0, 0, 0, 0.7),
+    0 5px 15px -5px rgba(128, 0, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(128, 0, 255, 0.02) 50%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  border-color: rgba(128, 0, 255, 0.25);
+  box-shadow: 
+    0 30px 60px -10px rgba(0, 0, 0, 0.8),
+    0 15px 30px -5px rgba(128, 0, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Luxury dual-layered frosted glass with more opacity but high translucency */
+.glass-panel-frosted {
+  background: linear-gradient(
+    135deg,
+    rgba(227, 217, 252, 0.04) 0%,
+    rgba(91, 42, 98, 0.05) 50%,
+    rgba(4, 6, 7, 0.25) 100%
+  );
+  background-image: 
+    linear-gradient(135deg, rgba(227, 217, 252, 0.04) 0%, rgba(91, 42, 98, 0.05) 50%, rgba(4, 6, 7, 0.25) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(227, 217, 252, 0.12);
+  box-shadow: 
+    0 30px 100px rgba(0, 0, 0, 0.8),
+    0 10px 30px rgba(128, 0, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 1px 2px rgba(227, 217, 252, 0.04);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-frosted:hover {
+  border-color: rgba(227, 217, 252, 0.22);
+  box-shadow: 
+    0 40px 120px rgba(0, 0, 0, 0.9),
+    0 15px 40px rgba(128, 0, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 1.5px 3px rgba(227, 217, 252, 0.08);
+}
+
+/* Glass panel luxury with chromatic / iridescent soft sheen and dynamic borders */
+.glass-panel-luxury {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(128, 0, 255, 0.015) 40%,
+    rgba(0, 255, 191, 0.005) 75%,
+    rgba(255, 255, 255, 0.005) 100%
+  );
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 
+    0 30px 70px -15px rgba(0, 0, 0, 0.85),
+    0 10px 25px -10px rgba(128, 0, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.05),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.6);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-luxury:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(128, 0, 255, 0.035) 40%,
+    rgba(0, 255, 191, 0.015) 75%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-color: rgba(128, 0, 255, 0.3);
+  box-shadow: 
+    0 40px 80px -15px rgba(0, 0, 0, 0.9),
+    0 15px 35px -5px rgba(0, 255, 191, 0.04),
+    0 10px 30px -10px rgba(128, 0, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 2px 3px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Elegant skeleton loading states resembling high-end brand graphics */
+.shimmer-skeleton-line {
+  background: linear-gradient(
+    90deg, 
+    rgba(128, 0, 255, 0.03) 25%, 
+    rgba(170, 51, 255, 0.1) 37%, 
+    rgba(128, 0, 255, 0.03) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 2s infinite ease-out;
+}
+
+.shimmer-skeleton-block {
+  background: linear-gradient(
+    90deg, 
+    rgba(21, 0, 42, 0.2) 25%, 
+    rgba(128, 0, 255, 0.06) 37%, 
+    rgba(21, 0, 42, 0.2) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 2.4s infinite ease-out;
+}
+
+/* Premium circular spotlight back glow */
+.radial-spotlight {
+  background: radial-gradient(circle at center, rgba(128, 0, 255, 0.14) 0%, rgba(21, 0, 42, 0) 70%);
+}
+
+.float-slow-effect {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.pulse-gentle-effect {
+  animation: pulse-gentle 5s ease-in-out infinite;
+}
+
+/* Single-Line Art Draw Animation */
+@keyframes draw-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-path 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Shine sweep animation */
+@keyframes shine-sweep {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: skewX(-25deg);
+  left: -100%;
+  transition: 0.75s;
+}
+
+.shine-effect:hover::after {
+  animation: shine-sweep 1.2s ease-in-out;
+}
+
+/* Before / After Slider Handle */
+.slider-handle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #faf9ff;
+  border: 1px solid rgba(128, 0, 255, 0.3);
+  box-shadow: 
+    0 0 0 4px rgba(7, 0, 20, 0.8),
+    0 0 20px rgba(128, 0, 255, 0.4),
+    0 10px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  z-index: 30;
+  transition: transform 0.2s;
+}
+
+.slider-handle:hover {
+  transform: scale(1.1);
+  box-shadow: 
+    0 0 0 6px rgba(7, 0, 20, 0.8),
+    0 0 25px rgba(128, 0, 255, 0.6),
+    0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+
