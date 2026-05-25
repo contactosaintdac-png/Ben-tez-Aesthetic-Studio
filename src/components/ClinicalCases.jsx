@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, MoveHorizontal } from "lucide-react";
 
 const CLINICAL_CASES = [
   {
@@ -10,9 +10,9 @@ const CLINICAL_CASES = [
     beforeImg: "/assets/case_01_before.jpg",
     afterImg: "/assets/case_01_after.jpg",
     details: [
-      "Volumetría de alta cohesividad",
-      "Soporte óseo maxilar",
-      "Ángulo mandibular 120°"
+      { label: "TÉCNICA", value: "Volumetría Cohesiva" },
+      { label: "INSUMO", value: "Juvederm Voluma" },
+      { label: "RESULTADO", value: "Soporte Maxilar" }
     ]
   },
   {
@@ -22,33 +22,33 @@ const CLINICAL_CASES = [
     beforeImg: "/assets/case_02_before.jpg",
     afterImg: "/assets/case_02_after.jpg",
     details: [
-      "Alineación del dorso nasal",
-      "Proyección de la punta",
-      "Rotación superior 105°"
+      { label: "TÉCNICA", value: "Alineación del dorso" },
+      { label: "INSUMO", value: "Restylane Lyft" },
+      { label: "RESULTADO", value: "Rotación 105°" }
     ]
   },
   {
     id: "03",
-    title: "Armonización Labial Clínica",
+    title: "Armonización Labial",
     subtitle: "Perfilado del borde bermellón y proporción áurea",
     beforeImg: "/assets/case_03_before.jpg",
     afterImg: "/assets/case_03_after.jpg",
     details: [
-      "Proporción 1:1.618 labial",
-      "Definición del arco de cupido",
-      "Ácido hialurónico dinámico"
+      { label: "TÉCNICA", value: "Proporción Áurea" },
+      { label: "INSUMO", value: "Juvederm Volbella" },
+      { label: "RESULTADO", value: "Ratio 1:1.618" }
     ]
   },
   {
     id: "04",
-    title: "Regeneración del Tercio Inferior",
+    title: "Regeneración Celular",
     subtitle: "Tratamiento integral de bioestimulación tisular",
     beforeImg: "/assets/case_04_before.jpg",
     afterImg: "/assets/case_04_after.jpg",
     details: [
-      "Inyección de Hidroxiapatita",
-      "Inducción de colágeno Tipo I",
-      "Retensado dérmico profundo"
+      { label: "TÉCNICA", value: "Retensado Profundo" },
+      { label: "INSUMO", value: "Radiesse" },
+      { label: "RESULTADO", value: "Colágeno Tipo I" }
     ]
   }
 ];
@@ -82,54 +82,87 @@ export default function ClinicalCases({ onBack }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-      className="min-h-screen bg-[#0A0A0A] text-stone-300 font-sans w-full relative z-50 flex flex-col pt-24 pb-12 px-6 md:px-12 selection:bg-stone-800"
+      className="min-h-screen bg-[#0A0A0A] text-stone-300 font-sans w-full relative z-50 flex flex-col pt-24 pb-12 px-6 md:px-12 selection:bg-[#D4AF37]/30"
     >
       {/* Absolute Header with Back Button */}
       <div className="absolute top-10 left-6 md:left-12 z-50">
         <button
           onClick={onBack}
-          className="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-stone-500 hover:text-stone-300 transition-colors duration-500"
+          className="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-stone-500 hover:text-stone-300 transition-colors duration-500 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
           Volver al Inicio
         </button>
       </div>
 
-      <div className="max-w-[1400px] mx-auto w-full flex-1 flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+      <div className="max-w-[1400px] mx-auto w-full flex-1 flex flex-col gap-12 lg:gap-16 items-start">
         
-        {/* LEFT COLUMN: Header & Case Selector */}
-        <div className="w-full lg:w-1/3 flex flex-col justify-between h-full lg:sticky lg:top-32 space-y-16">
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl font-serif text-stone-100 tracking-wide leading-tight">
-              Casos Clínicos <br />
-              <span className="italic font-light text-stone-400">Seleccionados</span>
+        {/* HEADER SECTION */}
+        <div className="w-full flex flex-col space-y-8">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-5xl font-serif text-white tracking-wide leading-tight">
+              Casos Clínicos <span className="italic font-light text-stone-400">Seleccionados</span>
             </h1>
-            <p className="text-xs md:text-sm text-stone-500 font-light tracking-[0.05em] leading-relaxed max-w-sm">
-              Restauración estructural, armonización facial y precisión anatómica.
+            <p className="text-xs md:text-sm text-stone-500 font-light tracking-[0.05em] leading-relaxed max-w-lg">
+              Restauración estructural, armonización facial y precisión anatómica. Documentación fotográfica de nuestras intervenciones de élite.
             </p>
           </div>
 
-          {/* Vertical Case Selector */}
-          <div className="flex flex-col gap-6">
+          {/* Golden Horizontal Separator with fade edges */}
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent" />
+        </div>
+
+        {/* CONTENT (2 COLUMNS) */}
+        <div className="w-full flex flex-col lg:flex-row gap-16 lg:gap-24 items-start relative">
+          
+          {/* Giant Decorative Number in Background */}
+          <div className="absolute -top-12 -right-4 md:-right-12 text-[15rem] md:text-[22rem] font-serif font-bold text-white opacity-[0.02] pointer-events-none select-none leading-none z-0">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentCase.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="inline-block"
+              >
+                {currentCase.id}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
+          {/* LEFT COLUMN: Case Selector */}
+          <div className="w-full lg:w-1/4 flex flex-col h-full lg:sticky lg:top-32 space-y-6 z-10">
             {CLINICAL_CASES.map((c, idx) => {
               const isActive = activeCase === idx;
               return (
                 <button
                   key={c.id}
                   onClick={() => setActiveCase(idx)}
-                  className="group flex items-start gap-6 text-left transition-all duration-700 outline-none"
+                  className={`group flex items-start gap-5 text-left transition-all duration-400 ease-[0.16,1,0.3,1] outline-none relative py-2 cursor-pointer ${
+                    isActive ? "opacity-100" : "opacity-35 hover:opacity-65"
+                  }`}
                 >
+                  {/* Vertical Golden Line for Active Item */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#D4AF37]"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  
                   <span
-                    className={`text-xs font-mono transition-colors duration-700 ${
-                      isActive ? "text-stone-300" : "text-stone-700 group-hover:text-stone-500"
+                    className={`text-sm font-mono transition-colors duration-400 mt-1 pl-4 ${
+                      isActive ? "text-[#D4AF37]" : "text-stone-500"
                     }`}
                   >
                     {c.id}
                   </span>
-                  <div className="flex-1 border-b border-stone-800/50 pb-4">
+                  <div className="flex-1 pb-2">
                     <h3
-                      className={`text-sm tracking-[0.15em] uppercase font-medium transition-all duration-700 ${
-                        isActive ? "text-stone-100" : "text-stone-600 group-hover:text-stone-400"
+                      className={`text-[15px] tracking-[0.1em] uppercase transition-all duration-400 ${
+                        isActive ? "text-white font-semibold" : "text-stone-400 font-medium"
                       }`}
                     >
                       {c.title}
@@ -140,10 +173,10 @@ export default function ClinicalCases({ onBack }) {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                           className="overflow-hidden"
                         >
-                          <p className="text-xs text-stone-500 font-light mt-2 leading-relaxed">
+                          <p className="text-xs text-stone-400 font-light mt-2.5 leading-relaxed pr-4 border-t border-stone-800/50 pt-2.5">
                             {c.subtitle}
                           </p>
                         </motion.div>
@@ -154,108 +187,118 @@ export default function ClinicalCases({ onBack }) {
               );
             })}
           </div>
-        </div>
 
-        {/* RIGHT COLUMN: Interactive Slider & Microcopy */}
-        <div className="w-full lg:w-2/3 flex flex-col space-y-8">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentCase.id}
-              initial={{ opacity: 0, filter: "blur(10px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, filter: "blur(10px)" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full flex flex-col space-y-6"
-            >
-              {/* Slider Container */}
-              <div
-                ref={sliderContainerRef}
-                onMouseMove={handleMouseMove}
-                onTouchMove={handleTouchMove}
-                className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-sm"
+          {/* RIGHT COLUMN: Interactive Slider & Overlay Data */}
+          <div className="w-full lg:w-3/4 flex flex-col z-10">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentCase.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }} // Fast image fade on change
+                className="w-full relative"
               >
-                {/* BEFORE IMAGE (Background) */}
-                <div className="absolute inset-0 w-full h-full">
-                  <img
-                    src={currentCase.beforeImg}
-                    alt={`${currentCase.title} Antes`}
-                    className="w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  {/* Placeholder fallback if image missing */}
-                  <div className="hidden absolute inset-0 bg-stone-900 flex-col items-center justify-center p-8 border border-stone-800">
-                     <span className="text-[10px] uppercase tracking-widest text-stone-600 font-mono">[ BEFORE_IMAGE_PLACEHOLDER ]</span>
-                  </div>
-                </div>
-
-                {/* AFTER IMAGE (Clipped Overlay) */}
+                {/* Slider Container */}
                 <div
-                  className="absolute inset-0 h-full overflow-hidden border-r border-stone-400/50 shadow-[1px_0_15px_rgba(0,0,0,0.5)] z-10"
-                  style={{ width: `${sliderPosition}%` }}
+                  ref={sliderContainerRef}
+                  onMouseMove={handleMouseMove}
+                  onTouchMove={handleTouchMove}
+                  className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-xl border border-white/5 shadow-2xl"
                 >
-                  <div
-                    className="absolute inset-0 h-full"
-                    style={{
-                      width: `${sliderContainerRef.current?.getBoundingClientRect().width || 1000}px`,
-                    }}
-                  >
+                  {/* BEFORE IMAGE (Background) */}
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center">
                     <img
-                      src={currentCase.afterImg}
-                      alt={`${currentCase.title} Después`}
-                      className="w-full h-full object-cover object-center pointer-events-none"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
+                      src={currentCase.beforeImg}
+                      alt={`${currentCase.title} Antes`}
+                      className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none"
+                      onError={(e) => { e.target.style.display = 'none'; }}
                     />
-                    {/* Placeholder fallback if image missing */}
-                    <div className="hidden absolute inset-0 bg-stone-800 flex-col items-center justify-center p-8">
-                       <span className="text-[10px] uppercase tracking-widest text-stone-400 font-mono">[ AFTER_IMAGE_PLACEHOLDER ]</span>
+                    {/* Fallback Text if image fails/missing */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-40">
+                       <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic opacity-50 mb-2">Pre-Intervención</span>
+                       <span className="text-xs uppercase tracking-widest text-stone-500 font-sans">{currentCase.title}</span>
                     </div>
                   </div>
-                </div>
 
-                {/* Slider Handle Line */}
-                <div
-                  className="absolute top-0 bottom-0 w-[1px] bg-stone-300 z-20 pointer-events-none"
-                  style={{ left: `${sliderPosition}%` }}
-                >
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full border border-stone-300/30 backdrop-blur-md flex items-center justify-center">
-                    <div className="w-1 h-1 rounded-full bg-stone-300" />
+                  {/* AFTER IMAGE (Clipped Overlay) */}
+                  <div
+                    className="absolute inset-0 h-full overflow-hidden border-r border-[#D4AF37]/80 shadow-[1px_0_15px_rgba(212,175,55,0.2)] z-10"
+                    style={{ width: `${sliderPosition}%` }}
+                  >
+                    <div
+                      className="absolute inset-0 h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center"
+                      style={{
+                        width: `${sliderContainerRef.current?.getBoundingClientRect().width || 1000}px`,
+                      }}
+                    >
+                      <img
+                        src={currentCase.afterImg}
+                        alt={`${currentCase.title} Después`}
+                        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+                        onError={(e) => { e.target.style.display = 'none'; }}
+                      />
+                      {/* Fallback Text if image fails/missing */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-80">
+                         <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic mb-2">Post-Intervención</span>
+                         <span className="text-xs uppercase tracking-widest text-stone-300 font-sans">Resultado Anatómico</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                {/* Labels overlay */}
-                <div className="absolute bottom-6 left-6 z-0 pointer-events-none">
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-stone-500 font-medium">
-                    Pre-Intervención
-                  </span>
-                </div>
-                <div className="absolute bottom-6 right-6 z-20 pointer-events-none">
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-stone-300 font-medium drop-shadow-md">
-                    Post-Intervención
-                  </span>
-                </div>
-              </div>
+                  {/* Slider Handle Line (Golden) */}
+                  <div
+                    className="absolute top-0 bottom-0 w-[1px] bg-[#D4AF37] z-20 pointer-events-none"
+                    style={{ left: `${sliderPosition}%` }}
+                  >
+                    <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full border border-[#D4AF37] bg-black/40 backdrop-blur-md flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                      <MoveHorizontal className="w-4 h-4 text-[#D4AF37]" />
+                    </div>
+                  </div>
 
-              {/* Clinical Details Microcopy */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-stone-800/50">
-                {currentCase.details.map((detail, idx) => (
-                  <div key={idx} className="flex flex-col space-y-1.5">
-                    <span className="text-[8px] uppercase tracking-[0.3em] text-stone-600 font-mono">
-                      Data 0{idx + 1}
-                    </span>
-                    <span className="text-xs text-stone-400 font-light tracking-wide leading-relaxed">
-                      {detail}
+                  {/* Labels floating overlay */}
+                  <div className="absolute top-6 left-6 z-0 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-white/10">
+                    <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400 font-medium">
+                      01. PRE
                     </span>
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                  <div className="absolute top-6 right-6 z-20 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-[#D4AF37]/20">
+                    <span className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-medium drop-shadow-md">
+                      02. POST
+                    </span>
+                  </div>
+
+                  {/* Clinical Details Overlay (Bottom Left) */}
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute bottom-6 left-6 right-6 lg:right-auto z-30 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-5 md:p-6 shadow-2xl"
+                  >
+                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
+                      {currentCase.details.map((detail, idx) => (
+                        <React.Fragment key={idx}>
+                          <div className="flex flex-col space-y-1.5 min-w-[120px]">
+                            <span className="text-[9px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold">
+                              {detail.label}
+                            </span>
+                            <span className="text-[13px] text-stone-200 font-light tracking-wide">
+                              {detail.value}
+                            </span>
+                          </div>
+                          
+                          {/* Golden Separator */}
+                          {idx < currentCase.details.length - 1 && (
+                            <div className="hidden sm:block w-px h-10 bg-[#D4AF37]/40" />
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </motion.div>
