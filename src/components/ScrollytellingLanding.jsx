@@ -395,8 +395,7 @@ export default function ScrollytellingLanding() {
       name: "Dra. Alexia Duarte",
       role: "Especialista en Armonización Facial",
       desc: "Mentora internacional en rejuvenecimiento facial volumétrico. Experta en bioestimulación inteligente de tejidos.",
-      image: null,
-      color: "from-purple-950/45 to-slate-900",
+      image: "/assets/specialist_alexia_duarte.png",
       rot: specRot2,
       x: specX2,
       y: specY2
@@ -405,8 +404,7 @@ export default function ScrollytellingLanding() {
       name: "Dr. Vinicius Said",
       role: "Cirugía Estructural & HOF",
       desc: "Mestre en cirugía estética facial. Combina técnicas no invasivas con arquitectura ósea para perfiles de alto impacto.",
-      image: null,
-      color: "from-indigo-950/45 to-slate-900",
+      image: "/assets/specialist_vinicius_said.png",
       rot: specRot3,
       x: specX3,
       y: specY3
@@ -415,8 +413,7 @@ export default function ScrollytellingLanding() {
       name: "Dra. Paula Gracietti",
       role: "Láser & Regeneración Celular",
       desc: "Especialista en aparatología de última generación y rejuvenecimiento profundo de la matriz extracelular dérmica.",
-      image: null,
-      color: "from-fuchsia-950/45 to-slate-900",
+      image: "/assets/specialist_paula_gracietti.png",
       rot: specRot4,
       x: specX4,
       y: specY4

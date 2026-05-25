@@ -14,7 +14,7 @@ const CATEGORIES_DATA = [
         title: "Peelings Químicos Médicos",
         desc: "Exfoliaciones dermatológicas profundas formuladas con ácidos de grado médico para remover imperfecciones y unificar el tono cutáneo.",
         outcome: "Restaura la luminosidad absoluta, eliminando manchas pigmentarias y secuelas visibles.",
-        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_peeling.png"
       },
       {
         id: "a2",
@@ -22,7 +22,7 @@ const CATEGORIES_DATA = [
         title: "Hydrafacial Premium",
         desc: "Protocolo de hidrodermoabrasión con succión al vacío patentada para infundir sueros antioxidantes, péptidos y ácido hialurónico.",
         outcome: "Eliminación instantánea de impurezas e hidratación extrema con brillo sedoso.",
-        image: "https://images.unsplash.com/photo-1522337360788-8b13edd793be?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_hydrafacial.png"
       },
       {
         id: "a3",
@@ -30,7 +30,7 @@ const CATEGORIES_DATA = [
         title: "Microneedling (Dermapen)",
         desc: "Terapia mecánica de inducción de colágeno mediante microagujas estériles que abren canales transdérmicos para elastina.",
         outcome: "Densificación tisular, reducción de poros y corrección progresiva de líneas finas.",
-        image: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_microneedling.png"
       },
       {
         id: "a4",
@@ -38,7 +38,7 @@ const CATEGORIES_DATA = [
         title: "Mesoterapia Facial Inyectada",
         desc: "Microinyecciones dérmicas de cócteles biológicos con vitaminas, aminoácidos y ácido hialurónico libre no reticulado.",
         outcome: "Hidratación celular tridimensional y revitalización biológica del rostro cansado.",
-        image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_mesoterapia.png"
       }
     ]
   },
@@ -53,7 +53,7 @@ const CATEGORIES_DATA = [
         title: "Láseres Médicos Avanzados",
         desc: "Dispositivos de CO2 Fraccionado y Nd:YAG para tratar discromías, secuelas de acné y fotoenvejecimiento con precisión micrométrica.",
         outcome: "Renovación cutánea profunda y eliminación de venitas o manchas vasculares.",
-        image: "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_laser.png"
       },
       {
         id: "b2",
@@ -61,7 +61,7 @@ const CATEGORIES_DATA = [
         title: "HIFU (Ultrasonido Microfocalizado)",
         desc: "Energía ultrasónica profunda que converge en las capas del SMAS para indicar retracción y reestructuración térmica.",
         outcome: "Efecto lifting no quirúrgico y redefinición tridimensional de la línea mandibular.",
-        image: "https://images.unsplash.com/photo-1519415510236-718bdfcd89c9?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_hifu.png"
       },
       {
         id: "b3",
@@ -69,7 +69,7 @@ const CATEGORIES_DATA = [
         title: "Radiofrecuencia Fraccionada",
         desc: "Tecnología Morpheus8 que emite radiofrecuencia a nivel subdérmico para compactar tejido adiposo y tensar tabiques fibrosos.",
         outcome: "Reducción de papada y retracción total de la piel flácida en el tercio inferior.",
-        image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_radiofrecuencia.png"
       }
     ]
   },
@@ -84,7 +84,7 @@ const CATEGORIES_DATA = [
         title: "Bioestimuladores de Colágeno",
         desc: "Inyección de hidroxiapatita de calcio (Radiesse) o ácido poli-L-láctico (Sculptra) para inducir neocolagénesis natural.",
         outcome: "Restauración del volumen facial perdido y tensión natural y progresiva.",
-        image: "https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_bioestimuladores.png"
       },
       {
         id: "c2",
@@ -92,7 +92,7 @@ const CATEGORIES_DATA = [
         title: "Polinucleótidos & Exosomas",
         desc: "Terapias de regeneración celular avanzadas que reparan el tejido a nivel de ADN y mitigan la inflamación crónica subdérmica.",
         outcome: "Bio-reparación total de la barrera cutánea y rejuvenecimiento celular desde el interior.",
-        image: "https://images.unsplash.com/photo-1579154204601-01588f35116f?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_polinucleotidos.png"
       },
       {
         id: "c3",
@@ -100,7 +100,7 @@ const CATEGORIES_DATA = [
         title: "Hilos Tensores de PDO",
         desc: "Colocación estratégica de hilos de polidioxanona reabsorbibles en la dermis profunda para crear una malla de soporte mecánico.",
         outcome: "Soporte de vectores descendidos y estimulación de colágeno en la zona tratada.",
-        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=600&auto=format&fit=crop"
+        image: "/assets/treatment_hilos.png"
       }
     ]
   }
