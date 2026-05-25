@@ -2,10 +2,14 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Sparkles, Image, ShieldCheck, Type, X } from "lucide-react";
 import Hero from "./Hero";
+import Metrics from "./Metrics";
+import PatientProfiles from "./PatientProfiles";
 import Treatments from "./Treatments";
 import Professionals from "./Professionals";
+import TestimonialsMarquee from "./TestimonialsMarquee";
 import TriageForm from "./TriageForm";
 import MagneticButton from "./MagneticButton";
+
 
 const FONT_THEMES = [
   {
@@ -148,8 +152,11 @@ export default function Layout() {
           {/* Nav Links with sliding indicator */}
           <nav className="hidden md:flex items-center gap-10">
             {[
-              { id: "home", label: "Home", action: () => scrollToSection("hero"), active: activeView === "main" && typeof window !== "undefined" && !window.location.hash.includes("tratamientos") },
-              { id: "tratamientos", label: "Tratamientos", action: () => scrollToSection("tratamientos"), active: activeView === "main" },
+              { id: "home", label: "Home", action: () => scrollToSection("hero"), active: activeView === "main" && typeof window !== "undefined" && !window.location.hash.includes("filosofia") && !window.location.hash.includes("tratamientos") && !window.location.hash.includes("profesionales") && !window.location.hash.includes("testimonios") },
+              { id: "filosofia", label: "Filosofía", action: () => scrollToSection("filosofia"), active: false },
+              { id: "tratamientos", label: "Tratamientos", action: () => scrollToSection("tratamientos"), active: false },
+              { id: "equipo", label: "Equipo", action: () => scrollToSection("profesionales"), active: false },
+              { id: "testimonios", label: "Testimonios", action: () => scrollToSection("testimonios"), active: false },
               { id: "galeria", label: "Galería", action: () => setActiveView("galeria"), active: activeView === "galeria" }
             ].map((link) => (
               <button
@@ -204,8 +211,13 @@ export default function Layout() {
             className="pt-20"
           >
             <Hero setActiveView={setActiveView} />
+            <Metrics />
+            <div id="filosofia">
+              <PatientProfiles />
+            </div>
             <Treatments />
             <Professionals />
+            <TestimonialsMarquee />
             
             {/* Triage Section */}
             <section id="triage" className="py-24 border-t border-brand-royal/10 relative">
