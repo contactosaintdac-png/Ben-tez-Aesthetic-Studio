@@ -87,7 +87,8 @@ function TeamCard({ member, offsetUp }) {
           onError={(e) => { e.currentTarget.style.display = "none"; }}
           className="absolute inset-0 w-full h-full object-cover object-top
                      filter grayscale-[60%] contrast-[1.05] brightness-[0.88]
-                     transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+                     transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+                     group-hover:grayscale-0 group-hover:brightness-[0.95] group-hover:contrast-[1.02]
                      group-hover:scale-[1.04]"
         />
         {/* Subtle gradient overlay */}
@@ -197,7 +198,8 @@ export default function Professionals() {
               alt={DIRECTOR.name}
               className="absolute inset-0 w-full h-full object-cover object-top
                          filter grayscale-[40%] contrast-[1.08] brightness-[0.85]
-                         transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+                         transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+                         group-hover:grayscale-0 group-hover:brightness-[0.92] group-hover:contrast-[1.04]
                          group-hover:scale-[1.03]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0d0b09]/80 via-[#0d0b09]/15 to-transparent" />
