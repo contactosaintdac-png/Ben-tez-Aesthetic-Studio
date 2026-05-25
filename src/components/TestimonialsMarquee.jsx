@@ -108,79 +108,88 @@ export default function TestimonialsMarquee() {
           Testimonios
         </p>
 
-        {/* Scrolling marquee behind */}
-        <div className="overflow-hidden mb-14 select-none pointer-events-none">
-          <motion.div
-            animate={{ x: [0, -900] }}
-            transition={{ repeat: Infinity, duration: 22, ease: "linear" }}
-            className="flex gap-14 whitespace-nowrap font-serif italic text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] leading-none text-stone-800/50 uppercase tracking-tight"
-          >
-            <span>Resultados reales ·</span>
-            <span>Resultados reales ·</span>
-            <span>Resultados reales ·</span>
-            <span>Resultados reales ·</span>
-          </motion.div>
-        </div>
+        {/* Glass card wrapper */}
+        <div className="relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden
+                        bg-white/[0.03] backdrop-blur-xl
+                        border border-white/[0.07]
+                        shadow-[0_8px_60px_rgba(73,40,194,0.08),inset_0_1px_0_rgba(255,255,255,0.05)]
+                        px-8 md:px-16 py-14 md:py-20">
 
-        {/* Quote carousel */}
-        <div className="relative min-h-[180px] flex flex-col justify-center">
-          <AnimatePresence custom={direction} mode="wait">
+          {/* Very faint violet inner glow — top center */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32
+                          bg-violet-600/10 blur-[60px] pointer-events-none rounded-full" />
+
+          {/* Scrolling marquee */}
+          <div className="overflow-hidden mb-12 select-none pointer-events-none -mx-4">
             <motion.div
-              key={current}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="text-center"
+              animate={{ x: [0, -900] }}
+              transition={{ repeat: Infinity, duration: 22, ease: "linear" }}
+              className="flex gap-14 whitespace-nowrap font-serif italic text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] leading-none text-white/[0.06] uppercase tracking-tight"
             >
-              {/* Opening mark */}
-              <span className="font-serif text-4xl text-stone-600/50 leading-none select-none">
-                "
-              </span>
-
-              <p className="font-serif italic text-stone-200 text-xl md:text-2xl lg:text-[1.65rem] leading-relaxed max-w-3xl mx-auto -mt-3 mb-8">
-                {TESTIMONIALS[current].quote}
-              </p>
-
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-[11px] tracking-[0.3em] uppercase text-stone-400 font-sans font-medium">
-                  {TESTIMONIALS[current].name}
-                </span>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-stone-600 font-sans">
-                  {TESTIMONIALS[current].detail}
-                </span>
-              </div>
+              <span>Resultados reales ·</span>
+              <span>Resultados reales ·</span>
+              <span>Resultados reales ·</span>
+              <span>Resultados reales ·</span>
             </motion.div>
-          </AnimatePresence>
-        </div>
+          </div>
 
-        {/* Dot navigation */}
-        <div className="flex justify-center gap-2.5 mt-14">
-          {TESTIMONIALS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              aria-label={`Testimonio ${i + 1}`}
-              className={`rounded-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-                ${i === current
-                  ? "w-5 h-1.5 bg-stone-300"
-                  : "w-1.5 h-1.5 bg-stone-700 hover:bg-stone-500"
-                }`}
-            />
-          ))}
-        </div>
+          {/* Quote carousel */}
+          <div className="relative min-h-[180px] flex flex-col justify-center">
+            <AnimatePresence custom={direction} mode="wait">
+              <motion.div
+                key={current}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="text-center"
+              >
+                <span className="font-serif text-4xl text-stone-500/50 leading-none select-none">
+                  "
+                </span>
+                <p className="font-serif italic text-stone-200 text-xl md:text-2xl lg:text-[1.65rem] leading-relaxed max-w-3xl mx-auto -mt-3 mb-8">
+                  {TESTIMONIALS[current].quote}
+                </p>
+                <div className="flex flex-col items-center gap-1">
+                  <span className="text-[11px] tracking-[0.3em] uppercase text-stone-400 font-sans font-medium">
+                    {TESTIMONIALS[current].name}
+                  </span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-stone-600 font-sans">
+                    {TESTIMONIALS[current].detail}
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-        {/* Thin bottom rule */}
-        <div className="mt-20 flex items-center gap-8">
-          <div className="flex-1 h-px bg-stone-800/50" />
-          <p className="text-[9px] tracking-[0.4em] uppercase text-stone-700 font-sans whitespace-nowrap">
-            Av. Alvear · Buenos Aires
-          </p>
-          <div className="flex-1 h-px bg-stone-800/50" />
-        </div>
+          {/* Dot navigation */}
+          <div className="flex justify-center gap-2.5 mt-12">
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Testimonio ${i + 1}`}
+                className={`rounded-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
+                  ${i === current
+                    ? "w-5 h-1.5 bg-stone-300"
+                    : "w-1.5 h-1.5 bg-stone-700 hover:bg-stone-500"
+                  }`}
+              />
+            ))}
+          </div>
 
+          {/* Bottom rule inside card */}
+          <div className="mt-14 flex items-center gap-8">
+            <div className="flex-1 h-px bg-white/[0.06]" />
+            <p className="text-[9px] tracking-[0.4em] uppercase text-stone-600 font-sans whitespace-nowrap">
+              Av. Alvear · Buenos Aires
+            </p>
+            <div className="flex-1 h-px bg-white/[0.06]" />
+          </div>
+
+        </div>
       </div>
     </section>
   );
