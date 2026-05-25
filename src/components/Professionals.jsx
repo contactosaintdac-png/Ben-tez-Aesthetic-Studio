@@ -104,14 +104,14 @@ function TeamCard({ member, offsetUp }) {
       </div>
 
       {/* Text */}
-      <div className="mt-5 space-y-1.5">
-        <p className="text-[10px] tracking-[0.25em] uppercase text-stone-500 font-sans font-medium">
+      <div className="mt-5 space-y-2">
+        <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 font-sans font-medium">
           {member.role}
         </p>
-        <h4 className="font-serif text-[1.05rem] text-stone-100 leading-snug">
+        <h4 className="font-serif text-[1.1rem] text-stone-50 leading-snug">
           {member.name}
         </h4>
-        <p className="text-[11.5px] text-stone-500 font-light leading-relaxed max-w-[220px]">
+        <p className="text-[12px] text-stone-400 font-light leading-relaxed max-w-[220px]">
           {member.bio}
         </p>
       </div>
