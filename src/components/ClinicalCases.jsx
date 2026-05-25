@@ -88,6 +88,7 @@ export default function ClinicalCases({ onBack }) {
       <div className="absolute top-10 left-6 md:left-12 z-50">
         <button
           onClick={onBack}
+          data-cursor="volver"
           className="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-stone-500 hover:text-stone-300 transition-colors duration-500 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
@@ -204,6 +205,7 @@ export default function ClinicalCases({ onBack }) {
                   ref={sliderContainerRef}
                   onMouseMove={handleMouseMove}
                   onTouchMove={handleTouchMove}
+                  data-cursor="deslizar"
                   className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-xl border border-white/5 shadow-2xl"
                 >
                   {/* BEFORE IMAGE (Background) */}
