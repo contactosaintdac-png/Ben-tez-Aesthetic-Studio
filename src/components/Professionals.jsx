@@ -111,7 +111,7 @@ function TeamCard({ member, offsetUp }) {
         <h4 className="font-serif text-[1.1rem] text-stone-50 leading-snug">
           {member.name}
         </h4>
-        <p className="text-[12px] text-stone-400 font-light leading-relaxed max-w-[220px]">
+        <p className="text-[13.5px] text-stone-400 font-light leading-relaxed max-w-[220px]">
           {member.bio}
         </p>
       </div>
