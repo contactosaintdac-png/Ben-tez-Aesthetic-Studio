@@ -9,6 +9,7 @@ import Professionals from "./Professionals";
 import TestimonialsMarquee from "./TestimonialsMarquee";
 import TriageForm from "./TriageForm";
 import MagneticButton from "./MagneticButton";
+import ClinicalCases from "./ClinicalCases";
 
 
 const FONT_THEMES = [
@@ -228,110 +229,7 @@ export default function Layout() {
             </section>
           </motion.main>
         ) : (
-          <motion.div
-            key="gallery-site"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="pt-20 min-h-screen flex flex-col items-center justify-center px-6 relative"
-          >
-            {/* Before / After Interactive Gallery Showcase */}
-            <div className="max-w-3xl w-full text-center py-20 space-y-10 relative z-10">
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-xl border border-brand-royal/30 flex items-center justify-center mx-auto mb-2 glass-panel float-slow-effect">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-neon animate-ping" />
-                </div>
-                <h1 className="text-3xl md:text-5xl font-serif text-white tracking-wide">
-                  Casos de Estudio <span className="italic font-light text-brand-glow">&amp; Perfección Médica</span>
-                </h1>
-                <p className="text-[9px] tracking-[0.3em] text-zinc-500 uppercase">
-                  Simetría Estructural Avanzada — Rinomodelación y Armonización Facial de Autor
-                </p>
-              </div>
-              
-              {/* Interactive Before/After slider component */}
-              <div 
-                ref={sliderContainerRef}
-                onMouseMove={handleMouseMove}
-                onTouchMove={handleTouchMove}
-                data-cursor="deslizar"
-                className="aspect-[16/10] w-full rounded-[2.5rem] bg-brand-dark border border-white/5 relative overflow-hidden select-none shadow-[0_30px_70px_rgba(0,0,0,0.8)] glass-panel cursor-ew-resize group"
-              >
-                {/* BEFORE IMAGE PANEL (Background) */}
-                <div className="absolute inset-0 w-full h-full bg-brand-purple/20 flex flex-col items-center justify-center p-8">
-                  {/* Fine micro-reticle vector clinical background pattern */}
-                  <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(128,0,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(128,0,255,0.15)_1px,transparent_1px)] bg-[size:30px_30px]" />
-                  
-                  {/* Clinical profile blueprint SVG */}
-                  <svg className="w-24 h-24 text-zinc-600 mb-4" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.8">
-                    <path d="M30,25 C33,23 37,23 40,25 C45,28 47,38 47,43 C47,52 38,62 30,70" />
-                    <circle cx="47" cy="43" r="2" fill="currentColor" fillOpacity="0.4" />
-                    <line x1="30" y1="43" x2="65" y2="43" stroke="currentColor" strokeDasharray="2 2" strokeOpacity="0.3" />
-                  </svg>
-                  <div className="text-sm font-serif italic text-zinc-400">Pérdida de soporte estructural nasal</div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-widest mt-2 font-mono">Déficit de volumen en proyección malar</div>
-                  
-                  {/* Label tag */}
-                  <span className="absolute bottom-6 left-6 px-3 py-1 rounded-md border border-white/10 bg-brand-dark/60 text-[9px] uppercase tracking-widest text-zinc-500 font-semibold backdrop-blur-md">
-                    Antes: Perfil Pre-Tratamiento
-                  </span>
-                </div>
-
-                {/* AFTER IMAGE PANEL (Sliding overlay) */}
-                <div 
-                  className="absolute inset-0 h-full overflow-hidden bg-brand-royal/5 border-r border-brand-neon/20 z-10"
-                  style={{ width: `${sliderPosition}%` }}
-                >
-                  <div 
-                    className="absolute inset-0 h-full bg-brand-royal/[0.08] flex flex-col items-center justify-center p-8"
-                    style={{ width: `${sliderContainerRef.current?.getBoundingClientRect().width || 600}px` }}
-                  >
-                    {/* Glowing satin organic background glow */}
-                    <div className="absolute w-[80%] h-[80%] rounded-full bg-brand-royal/15 blur-3xl pointer-events-none" />
-                    <div className="absolute inset-0 opacity-15 bg-[linear-gradient(rgba(0,255,191,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,191,0.1)_1px,transparent_1px)] bg-[size:30px_30px]" />
-                    
-                    {/* Corrected profile blueprint SVG */}
-                    <svg className="w-24 h-24 text-brand-neon mb-4" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="1.2">
-                      <path d="M30,25 C34,24 38,24 42,25 C48,27 52,38 52,43 C52,50 42,62 30,70" strokeLinecap="round" />
-                      <circle cx="52" cy="43" r="2" fill="currentColor" className="animate-pulse" />
-                      <line x1="30" y1="43" x2="65" y2="43" stroke="currentColor" strokeDasharray="2 2" strokeOpacity="0.4" />
-                      <path d="M42,25 L52,43" stroke="currentColor" strokeDasharray="1 1" />
-                    </svg>
-                    <div className="text-sm font-serif italic text-white font-semibold">Proyección del dorso nasal corregida</div>
-                    <div className="text-[10px] text-brand-neon uppercase tracking-widest mt-2 font-mono">Volumetría restaurada con Juvederm Volux</div>
-
-                    {/* Label tag */}
-                    <span className="absolute bottom-6 left-6 px-3 py-1 rounded-md border border-brand-neon/20 bg-brand-dark/80 text-[9px] uppercase tracking-widest text-brand-neon font-semibold backdrop-blur-md shadow-[0_0_10px_rgba(0,255,191,0.1)]">
-                      Después: Definición Estructural Inmediata
-                    </span>
-                  </div>
-                </div>
-
-                {/* Slider Handle (Divider Bar) */}
-                <div 
-                  className="absolute top-0 bottom-0 w-[1.5px] bg-gradient-to-b from-brand-neon/40 via-brand-neon to-brand-neon/40 z-20 pointer-events-none"
-                  style={{ left: `${sliderPosition}%` }}
-                >
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 slider-handle">
-                    <svg className="w-4 h-4 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 9l-4 4 4 4m8-8l4 4-4 4" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Back navigation */}
-              <div className="pt-4">
-                <button
-                  onClick={() => setActiveView("main")}
-                  className="text-[9px] uppercase tracking-[0.3em] text-brand-glow hover:text-white transition-all cursor-pointer inline-flex items-center gap-2 group font-semibold"
-                >
-                  <span className="group-hover:-translate-x-1 transition-transform duration-300">←</span> Volver al inicio
-                </button>
-              </div>
-            </div>
-          </motion.div>
+          <ClinicalCases key="gallery-site" onBack={() => setActiveView("main")} />
         )}
       </AnimatePresence>
 
