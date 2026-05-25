@@ -69,7 +69,7 @@ export default function CustomCursor() {
     <>
       {/* Outer ring */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border border-white/40 pointer-events-none z-50 mix-blend-difference hidden lg:flex items-center justify-center text-center overflow-hidden"
+        className="fixed top-0 left-0 rounded-full border border-white/40 pointer-events-none z-[9999] mix-blend-difference hidden lg:flex items-center justify-center text-center overflow-hidden"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -97,7 +97,7 @@ export default function CustomCursor() {
       </motion.div>
       {/* Inner dot */}
       <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-50 mix-blend-difference hidden lg:block"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference hidden lg:block"
         style={{
           x: cursorX,
           y: cursorY,
