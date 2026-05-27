@@ -45,8 +45,9 @@ const CLINICAL_CASES = [
     subtitle: "Tratamiento integral de bioestimulación tisular",
     beforeImg: "/assets/case_04_before.jpg",
     afterImg: "/assets/case_04_after.jpg",
-    // Aligns the face structure between before/after shots (zoom + shift)
-    beforeStyle: { transform: "scale(1.04) translate(0.5%, -0.8%)" },
+    // Aligns the face structure precisely based on visual measurements
+    beforeStyle: { transform: "scale(1.02)" },
+    afterStyle: { transform: "scale(1.06) translate(-1%, 2.2%)" },
     details: [
       { label: "TÉCNICA", value: "Retensado Profundo" },
       { label: "INSUMO", value: "Radiesse" },
@@ -59,8 +60,9 @@ const CLINICAL_CASES = [
     subtitle: "Definición mandibular y proyección del mentón",
     beforeImg: "/assets/case_05_before.jpg",
     afterImg: "/assets/case_05_after.jpg",
-    // Aligns the facial features (nose/jaw) between before/after shots
-    beforeStyle: { transform: "scale(1.05) translate(0.8%, 1.8%)" },
+    // Aligns the facial features precisely based on visual measurements
+    beforeStyle: { transform: "scale(1.02)" },
+    afterStyle: { transform: "scale(1.08) translate(-2%, -4.5%)" },
     details: [
       { label: "TÉCNICA", value: "Estructuración Ósea" },
       { label: "INSUMO", value: "Hidroxiapatita" },
