@@ -218,7 +218,7 @@ export default function ClinicalCases({ onBack }) {
                   onMouseMove={handleMouseMove}
                   onTouchMove={handleTouchMove}
                   data-cursor="deslizar"
-                  className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-xl border border-white/5 shadow-2xl"
+                  className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-xl border border-white/5 shadow-2xl select-none touch-none"
                 >
                   {/* AFTER IMAGE (Background, Right side) */}
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center">
@@ -283,14 +283,15 @@ export default function ClinicalCases({ onBack }) {
                       <MoveHorizontal className="w-4 h-4 text-[#D4AF37]" />
                     </div>
                   </div>
+                </div>
 
-                  {/* Clinical Details Overlay (Bottom Left) */}
-                  <motion.div 
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute bottom-6 left-6 right-6 lg:right-auto z-30 bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-5 md:p-6 shadow-2xl"
-                  >
+                {/* Clinical Details (Moved Below the Image) */}
+                <motion.div 
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="mt-4 lg:mt-6 z-30 bg-[#121212] border border-white/5 rounded-xl p-5 md:p-6 shadow-xl w-full"
+                >
                     <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                       {currentCase.details.map((detail, idx) => (
                         <React.Fragment key={idx}>
