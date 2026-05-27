@@ -79,11 +79,17 @@ export default function ClinicalCases({ onBack }) {
   };
 
   const handleMouseMove = (e) => {
-    if (e.buttons === 1) handleSliderMove(e.clientX);
+    if (e.buttons === 1) {
+      e.preventDefault();
+      handleSliderMove(e.clientX);
+    }
   };
 
   const handleTouchMove = (e) => {
-    if (e.touches[0]) handleSliderMove(e.touches[0].clientX);
+    if (e.touches[0]) {
+      // Touch events don't select text in the same way, but it's good practice
+      handleSliderMove(e.touches[0].clientX);
+    }
   };
 
   const currentCase = CLINICAL_CASES[activeCase];
@@ -202,7 +208,7 @@ export default function ClinicalCases({ onBack }) {
           </div>
 
           {/* RIGHT COLUMN: Interactive Slider & Overlay Data */}
-          <div className="w-full lg:w-3/4 flex flex-col z-10">
+          <div className="w-full lg:w-3/4 flex flex-col z-10 space-y-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentCase.id}
@@ -210,7 +216,7 @@ export default function ClinicalCases({ onBack }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }} // Fast image fade on change
-                className="w-full relative"
+                className="w-full flex flex-col space-y-6"
               >
                 {/* Slider Container */}
                 <div
@@ -218,24 +224,24 @@ export default function ClinicalCases({ onBack }) {
                   onMouseMove={handleMouseMove}
                   onTouchMove={handleTouchMove}
                   data-cursor="deslizar"
-                  className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-xl border border-white/5 shadow-2xl select-none touch-none"
+                  className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-xl border border-white/5 shadow-2xl select-none"
                 >
                   {/* AFTER IMAGE (Background, Right side) */}
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center">
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center select-none">
                     <img
                       src={currentCase.afterImg}
                       alt={`${currentCase.title} Después`}
-                      className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+                      className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
                     {/* Fallback Text if image fails/missing */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-80">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-80 select-none">
                        <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic mb-2">Post-Intervención</span>
                        <span className="text-xs uppercase tracking-widest text-stone-300 font-sans">Resultado Anatómico</span>
                     </div>
 
                     {/* POST Label (Gets covered when BEFORE overlay expands over it) */}
-                    <div className="absolute top-6 right-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-[#D4AF37]/20">
+                    <div className="absolute top-6 right-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-[#D4AF37]/20 select-none">
                       <span className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-medium drop-shadow-md">
                         02. POST
                       </span>
@@ -244,11 +250,11 @@ export default function ClinicalCases({ onBack }) {
 
                   {/* BEFORE IMAGE (Clipped Overlay, Left side) */}
                   <div
-                    className="absolute inset-0 h-full overflow-hidden border-r border-[#D4AF37]/80 shadow-[1px_0_15px_rgba(212,175,55,0.2)] z-10"
+                    className="absolute inset-0 h-full overflow-hidden border-r border-[#D4AF37]/80 shadow-[1px_0_15px_rgba(212,175,55,0.2)] z-10 select-none"
                     style={{ width: `${sliderPosition}%` }}
                   >
                     <div
-                      className="absolute inset-0 h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center"
+                      className="absolute inset-0 h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center select-none"
                       style={{
                         width: `${sliderContainerRef.current?.getBoundingClientRect().width || 1000}px`,
                       }}
@@ -256,17 +262,17 @@ export default function ClinicalCases({ onBack }) {
                       <img
                         src={currentCase.beforeImg}
                         alt={`${currentCase.title} Antes`}
-                        className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none"
+                        className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none select-none"
                         onError={(e) => { e.target.style.display = 'none'; }}
                       />
                       {/* Fallback Text if image fails/missing */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-40">
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-40 select-none">
                          <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic opacity-50 mb-2">Pre-Intervención</span>
                          <span className="text-xs uppercase tracking-widest text-stone-500 font-sans">{currentCase.title}</span>
                       </div>
 
                       {/* PRE Label (Gets clipped when BEFORE overlay shrinks) */}
-                      <div className="absolute top-6 left-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-white/10">
+                      <div className="absolute top-6 left-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 select-none">
                         <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400 font-medium">
                           01. PRE
                         </span>
@@ -285,34 +291,33 @@ export default function ClinicalCases({ onBack }) {
                   </div>
                 </div>
 
-                {/* Clinical Details (Moved Below the Image) */}
+                {/* Clinical Details Overlay (Placed below the slider, matching its width) */}
                 <motion.div 
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={{ y: 15, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="mt-4 lg:mt-6 z-30 bg-[#121212] border border-white/5 rounded-xl p-5 md:p-6 shadow-xl w-full"
+                  transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full bg-stone-950/40 backdrop-blur-md border border-white/5 rounded-xl p-5 md:p-6 shadow-xl select-none"
                 >
-                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
-                      {currentCase.details.map((detail, idx) => (
-                        <React.Fragment key={idx}>
-                          <div className="flex flex-col space-y-1.5 min-w-[120px]">
-                            <span className="text-[9px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold">
-                              {detail.label}
-                            </span>
-                            <span className="text-[13px] text-stone-200 font-light tracking-wide">
-                              {detail.value}
-                            </span>
-                          </div>
-                          
-                          {/* Golden Separator */}
-                          {idx < currentCase.details.length - 1 && (
-                            <div className="hidden sm:block w-px h-10 bg-[#D4AF37]/40" />
-                          )}
-                        </React.Fragment>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
+                  <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center justify-around">
+                    {currentCase.details.map((detail, idx) => (
+                      <React.Fragment key={idx}>
+                        <div className="flex flex-col space-y-1.5 min-w-[120px]">
+                          <span className="text-[9px] uppercase tracking-[0.25em] text-[#D4AF37] font-semibold">
+                            {detail.label}
+                          </span>
+                          <span className="text-[13px] text-stone-200 font-light tracking-wide">
+                            {detail.value}
+                          </span>
+                        </div>
+                        
+                        {/* Golden Separator */}
+                        {idx < currentCase.details.length - 1 && (
+                          <div className="hidden sm:block w-px h-8 bg-[#D4AF37]/20" />
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
