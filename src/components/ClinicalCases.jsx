@@ -50,6 +50,18 @@ const CLINICAL_CASES = [
       { label: "INSUMO", value: "Radiesse" },
       { label: "RESULTADO", value: "Colágeno Tipo I" }
     ]
+  },
+  {
+    id: "05",
+    title: "Masculinización Facial",
+    subtitle: "Definición mandibular y proyección del mentón",
+    beforeImg: "/assets/case_05_before.jpg",
+    afterImg: "/assets/case_05_after.jpg",
+    details: [
+      { label: "TÉCNICA", value: "Estructuración Ósea" },
+      { label: "INSUMO", value: "Hidroxiapatita" },
+      { label: "RESULTADO", value: "Contorno Cuadrado" }
+    ]
   }
 ];
 
@@ -208,22 +220,29 @@ export default function ClinicalCases({ onBack }) {
                   data-cursor="deslizar"
                   className="relative w-full aspect-[4/3] md:aspect-[16/10] bg-stone-900 overflow-hidden cursor-ew-resize rounded-xl border border-white/5 shadow-2xl"
                 >
-                  {/* BEFORE IMAGE (Background) */}
+                  {/* AFTER IMAGE (Background, Right side) */}
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center">
                     <img
-                      src={currentCase.beforeImg}
-                      alt={`${currentCase.title} Antes`}
-                      className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none"
+                      src={currentCase.afterImg}
+                      alt={`${currentCase.title} Después`}
+                      className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
                     {/* Fallback Text if image fails/missing */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-40">
-                       <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic opacity-50 mb-2">Pre-Intervención</span>
-                       <span className="text-xs uppercase tracking-widest text-stone-500 font-sans">{currentCase.title}</span>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-80">
+                       <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic mb-2">Post-Intervención</span>
+                       <span className="text-xs uppercase tracking-widest text-stone-300 font-sans">Resultado Anatómico</span>
+                    </div>
+
+                    {/* POST Label (Gets covered when BEFORE overlay expands over it) */}
+                    <div className="absolute top-6 right-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-[#D4AF37]/20">
+                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-medium drop-shadow-md">
+                        02. POST
+                      </span>
                     </div>
                   </div>
 
-                  {/* AFTER IMAGE (Clipped Overlay) */}
+                  {/* BEFORE IMAGE (Clipped Overlay, Left side) */}
                   <div
                     className="absolute inset-0 h-full overflow-hidden border-r border-[#D4AF37]/80 shadow-[1px_0_15px_rgba(212,175,55,0.2)] z-10"
                     style={{ width: `${sliderPosition}%` }}
@@ -235,15 +254,22 @@ export default function ClinicalCases({ onBack }) {
                       }}
                     >
                       <img
-                        src={currentCase.afterImg}
-                        alt={`${currentCase.title} Después`}
-                        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+                        src={currentCase.beforeImg}
+                        alt={`${currentCase.title} Antes`}
+                        className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none"
                         onError={(e) => { e.target.style.display = 'none'; }}
                       />
                       {/* Fallback Text if image fails/missing */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-80">
-                         <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic mb-2">Post-Intervención</span>
-                         <span className="text-xs uppercase tracking-widest text-stone-300 font-sans">Resultado Anatómico</span>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-40">
+                         <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic opacity-50 mb-2">Pre-Intervención</span>
+                         <span className="text-xs uppercase tracking-widest text-stone-500 font-sans">{currentCase.title}</span>
+                      </div>
+
+                      {/* PRE Label (Gets clipped when BEFORE overlay shrinks) */}
+                      <div className="absolute top-6 left-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-white/10">
+                        <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400 font-medium">
+                          01. PRE
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -256,18 +282,6 @@ export default function ClinicalCases({ onBack }) {
                     <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full border border-[#D4AF37] bg-black/40 backdrop-blur-md flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                       <MoveHorizontal className="w-4 h-4 text-[#D4AF37]" />
                     </div>
-                  </div>
-
-                  {/* Labels floating overlay */}
-                  <div className="absolute top-6 left-6 z-0 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-white/10">
-                    <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400 font-medium">
-                      01. PRE
-                    </span>
-                  </div>
-                  <div className="absolute top-6 right-6 z-20 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-[#D4AF37]/20">
-                    <span className="text-[9px] uppercase tracking-[0.2em] text-[#D4AF37] font-medium drop-shadow-md">
-                      02. POST
-                    </span>
                   </div>
 
                   {/* Clinical Details Overlay (Bottom Left) */}
