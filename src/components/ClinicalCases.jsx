@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, MoveHorizontal } from "lucide-react";
 
@@ -75,7 +75,19 @@ export default function ClinicalCases({ onBack }) {
   const [activeCase, setActiveCase] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [imageErrors, setImageErrors] = useState({});
+  const [containerWidth, setContainerWidth] = useState(1000);
   const sliderContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (!sliderContainerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      if (entries[0]) {
+        setContainerWidth(entries[0].contentRect.width);
+      }
+    });
+    observer.observe(sliderContainerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleSliderMove = (clientX) => {
     if (!sliderContainerRef.current) return;
@@ -268,7 +280,7 @@ export default function ClinicalCases({ onBack }) {
                     <div
                       className="absolute inset-0 h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center select-none"
                       style={{
-                        width: `${sliderContainerRef.current?.getBoundingClientRect().width || 1000}px`,
+                        width: `${containerWidth}px`,
                       }}
                     >
                       {!imageErrors[`${currentCase.id}_before`] && (
