@@ -45,6 +45,8 @@ const CLINICAL_CASES = [
     subtitle: "Tratamiento integral de bioestimulación tisular",
     beforeImg: "/assets/case_04_before.jpg",
     afterImg: "/assets/case_04_after.jpg",
+    // Aligns the face structure between before/after shots (zoom + shift)
+    beforeStyle: { transform: "scale(1.04) translate(0.5%, -0.8%)" },
     details: [
       { label: "TÉCNICA", value: "Retensado Profundo" },
       { label: "INSUMO", value: "Radiesse" },
@@ -57,6 +59,8 @@ const CLINICAL_CASES = [
     subtitle: "Definición mandibular y proyección del mentón",
     beforeImg: "/assets/case_05_before.jpg",
     afterImg: "/assets/case_05_after.jpg",
+    // Aligns the facial features (nose/jaw) between before/after shots
+    beforeStyle: { transform: "scale(1.05) translate(0.8%, 1.8%)" },
     details: [
       { label: "TÉCNICA", value: "Estructuración Ósea" },
       { label: "INSUMO", value: "Hidroxiapatita" },
@@ -234,6 +238,7 @@ export default function ClinicalCases({ onBack }) {
                         src={currentCase.afterImg}
                         alt={`${currentCase.title} Después`}
                         className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+                        style={currentCase.afterStyle || {}}
                         onError={() => setImageErrors(prev => ({ ...prev, [`${currentCase.id}_after`]: true }))}
                       />
                     )}
@@ -269,6 +274,7 @@ export default function ClinicalCases({ onBack }) {
                           src={currentCase.beforeImg}
                           alt={`${currentCase.title} Antes`}
                           className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none select-none"
+                          style={currentCase.beforeStyle || {}}
                           onError={() => setImageErrors(prev => ({ ...prev, [`${currentCase.id}_before`]: true }))}
                         />
                       )}
