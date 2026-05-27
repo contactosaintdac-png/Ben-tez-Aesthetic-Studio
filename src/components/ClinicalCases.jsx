@@ -68,6 +68,7 @@ const CLINICAL_CASES = [
 export default function ClinicalCases({ onBack }) {
   const [activeCase, setActiveCase] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(50);
+  const [imageErrors, setImageErrors] = useState({});
   const sliderContainerRef = useRef(null);
 
   const handleSliderMove = (clientX) => {
@@ -228,17 +229,21 @@ export default function ClinicalCases({ onBack }) {
                 >
                   {/* AFTER IMAGE (Background, Right side) */}
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center select-none">
-                    <img
-                      src={currentCase.afterImg}
-                      alt={`${currentCase.title} Después`}
-                      className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
+                    {!imageErrors[`${currentCase.id}_after`] && (
+                      <img
+                        src={currentCase.afterImg}
+                        alt={`${currentCase.title} Después`}
+                        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+                        onError={() => setImageErrors(prev => ({ ...prev, [`${currentCase.id}_after`]: true }))}
+                      />
+                    )}
                     {/* Fallback Text if image fails/missing */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-80 select-none">
-                       <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic mb-2">Post-Intervención</span>
-                       <span className="text-xs uppercase tracking-widest text-stone-300 font-sans">Resultado Anatómico</span>
-                    </div>
+                    {imageErrors[`${currentCase.id}_after`] && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-80 select-none">
+                         <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic mb-2">Post-Intervención</span>
+                         <span className="text-xs uppercase tracking-widest text-stone-300 font-sans">Resultado Anatómico</span>
+                      </div>
+                    )}
 
                     {/* POST Label (Gets covered when BEFORE overlay expands over it) */}
                     <div className="absolute top-6 right-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-[#D4AF37]/20 select-none">
@@ -259,17 +264,21 @@ export default function ClinicalCases({ onBack }) {
                         width: `${sliderContainerRef.current?.getBoundingClientRect().width || 1000}px`,
                       }}
                     >
-                      <img
-                        src={currentCase.beforeImg}
-                        alt={`${currentCase.title} Antes`}
-                        className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none select-none"
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                      />
+                      {!imageErrors[`${currentCase.id}_before`] && (
+                        <img
+                          src={currentCase.beforeImg}
+                          alt={`${currentCase.title} Antes`}
+                          className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-80 mix-blend-luminosity pointer-events-none select-none"
+                          onError={() => setImageErrors(prev => ({ ...prev, [`${currentCase.id}_before`]: true }))}
+                        />
+                      )}
                       {/* Fallback Text if image fails/missing */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-40 select-none">
-                         <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic opacity-50 mb-2">Pre-Intervención</span>
-                         <span className="text-xs uppercase tracking-widest text-stone-500 font-sans">{currentCase.title}</span>
-                      </div>
+                      {imageErrors[`${currentCase.id}_before`] && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none p-12 text-center opacity-40 select-none">
+                           <span className="text-2xl md:text-3xl font-serif text-[#D4AF37] italic opacity-50 mb-2">Pre-Intervención</span>
+                           <span className="text-xs uppercase tracking-widest text-stone-500 font-sans">{currentCase.title}</span>
+                        </div>
+                      )}
 
                       {/* PRE Label (Gets clipped when BEFORE overlay shrinks) */}
                       <div className="absolute top-6 left-6 z-10 pointer-events-none bg-black/40 backdrop-blur-md px-3 py-1.5 rounded border border-white/10 select-none">
