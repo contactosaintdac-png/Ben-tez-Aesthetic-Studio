@@ -45,6 +45,7 @@ const CLINICAL_CASES = [
     subtitle: "Tratamiento integral de bioestimulación tisular",
     beforeImg: "/assets/case_04_before.jpg",
     afterImg: "/assets/case_04_after.jpg",
+    beforeStyle: { transform: "scale(0.93) translateY(-2%)" },
     details: [
       { label: "TÉCNICA", value: "Retensado Profundo" },
       { label: "INSUMO", value: "Radiesse" },
