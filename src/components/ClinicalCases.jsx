@@ -70,22 +70,32 @@ export default function ClinicalCases({ onBack }) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [imageErrors, setImageErrors] = useState({});
   const [containerWidth, setContainerWidth] = useState(1000);
-  const sliderContainerRef = useRef(null);
+  const sliderContainerElRef = useRef(null);
+  const observerRef = useRef(null);
 
-  useEffect(() => {
-    if (!sliderContainerRef.current) return;
-    const observer = new ResizeObserver((entries) => {
-      if (entries[0]) {
-        setContainerWidth(entries[0].contentRect.width);
-      }
-    });
-    observer.observe(sliderContainerRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const sliderContainerRef = (node) => {
+    if (sliderContainerElRef.current === node) return;
+    sliderContainerElRef.current = node;
+
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+
+    if (node) {
+      const observer = new ResizeObserver((entries) => {
+        if (entries[0]) {
+          setContainerWidth(entries[0].contentRect.width);
+        }
+      });
+      observer.observe(node);
+      observerRef.current = observer;
+    }
+  };
 
   const handleSliderMove = (clientX) => {
-    if (!sliderContainerRef.current) return;
-    const rect = sliderContainerRef.current.getBoundingClientRect();
+    if (!sliderContainerElRef.current) return;
+    const rect = sliderContainerElRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderPosition(percentage);
